@@ -1,8 +1,8 @@
-import { LoaderSpinnerService } from "./../../modules/loader-spinner/loader-spinner.service";
-import { Product } from "./../model/product";
-import { ProductService } from "./../shared/product.service";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Product } from "../../shared/models/product";
+import { ProductService } from "../../shared/services/product.service";
+import { LoaderSpinnerService } from "../../shared/loader-spinner/loader-spinner";
 
 @Component({
   selector: "app-product-detail",
@@ -34,8 +34,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     x.snapshotChanges().subscribe(product => {
       this.spinnerService.hide();
       const y = product.payload.toJSON() as Product;
-
-      console.log("getProduct id: " + id, y);
 
       y["$key"] = id;
       this.product = y;
